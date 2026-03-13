@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fcf8;
+  --foreground: #112218;
+  --muted: #64726a;
+  --emeza-green: #1b7a4a;
+  --emeza-dark: #0d3b24;
+  --confirm-gold: #d4a843;
+  --mist-green: #f0f7f3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-display: "Gill Sans", "Avenir Next Condensed", "Trebuchet MS",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Gill Sans", "Avenir Next Condensed", "Trebuchet MS",
+    sans-serif;
+}
+
+a,
+button {
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+a:hover,
+button:hover {
+  transform: translateY(-1px);
+}
+
+::selection {
+  background: rgba(212, 168, 67, 0.26);
+}
