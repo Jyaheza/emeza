@@ -1,34 +1,44 @@
+"use client";
+
 import Link from "next/link";
 
+import { useLanguage } from "@/components/language-provider";
 import { SellerOnboarding } from "@/components/seller-onboarding";
+import { SiteHeader } from "@/components/site-header";
+import { getMarketingContent, sellerThemes } from "@/lib/app-data";
 
 export default function SellPage() {
+  const { copy, language } = useLanguage();
+  const marketingContent = getMarketingContent(language);
+
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,_#f5fbf6_0%,_#ffffff_40%)] px-6 py-8 lg:px-10">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <section className="rounded-[2rem] bg-[#0D3B24] p-8 text-white shadow-[0_30px_90px_rgba(13,59,36,0.16)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#D4A843]">
-            Emeza for sellers
+    <>
+      <SiteHeader />
+      <main className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        <section className="rounded-[32px] bg-[linear-gradient(160deg,#1b5e20_0%,#0d3b12_100%)] p-8 text-white shadow-[0_28px_100px_rgba(18,17,16,0.16)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f2c12e]">
+            {copy.sell.kicker}
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
-            Turn your WhatsApp sales into trusted checkouts.
+          <h1 className="mt-4 text-5xl font-semibold tracking-tight">
+            {copy.sell.title}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-8 text-white/76">
-            Share one storefront link in your bio, accept mobile money with
-            buyer protection, and only get paid when your customer confirms.
+          <p className="mt-5 max-w-xl text-base leading-8 text-white/74">
+            {copy.sell.description}
           </p>
 
           <div className="mt-8 grid gap-4">
-            {[
-              "Protected orders instead of risky manual MoMo transfers",
-              "A storefront you can share on Instagram, TikTok, and WhatsApp",
-              "Clear order status from payment held to payout delivered",
-            ].map((item) => (
+            {marketingContent.sellerThemes.map((theme, index) => (
               <div
-                key={item}
-                className="rounded-2xl border border-white/10 bg-white/7 px-4 py-4 text-sm leading-6 text-white/82"
+                key={theme.id}
+                className="rounded-[22px] border border-white/10 bg-white/6 px-4 py-4"
               >
-                {item}
+                <div
+                  className={`mb-4 h-24 rounded-[18px] bg-gradient-to-br ${sellerThemes[index].accent}`}
+                />
+                <p className="text-lg font-semibold">{theme.cardTitle}</p>
+                <p className="mt-1 text-sm text-white/70">
+                  {theme.cardDescription}
+                </p>
               </div>
             ))}
           </div>
@@ -36,21 +46,21 @@ export default function SellPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/dashboard"
-              className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#0D3B24]"
+              className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#0d3b12]"
             >
-              View seller dashboard
+              {copy.sell.dashboard}
             </Link>
             <Link
               href="/store/joyce-style"
-              className="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white"
+              className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white"
             >
-              View buyer storefront
+              {copy.sell.storefront}
             </Link>
           </div>
         </section>
 
         <SellerOnboarding />
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
